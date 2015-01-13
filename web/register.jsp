@@ -12,10 +12,11 @@
     <title>Register</title>
     <script language="JavaScript">
         function doSubmit(){
+            var nm=document.getElementById("name");
             var unm=document.getElementById("uname");
             var pwd=document.getElementById("pwd");
             var rpwd=document.getElementById("rpwd");
-            if(unm.value=="" || pwd.value=="" || rpwd.value==""){
+            if(unm.value=="" || pwd.value=="" || rpwd.value=="" ||nm.value==""){
                 alert("Fields can't be left blank");
                 return false;
             }
@@ -29,6 +30,10 @@
 <body>
 <form method="post" action="register.html" onSubmit="return doSubmit()">
     <table>
+        <tr>
+            <td><b>Name</b></td>
+            <td><input type="text" name="name" id="name"></td>
+        </tr>
         <tr>
             <td><b>Username</b></td>
             <td><input type="text" name="username" id="uname"></td>

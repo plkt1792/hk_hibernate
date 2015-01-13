@@ -11,8 +11,7 @@ import javax.persistence.*;
 public class User {
 
     private String username;
-
-
+    private String name;
     private String password;
 
     public User(){}
@@ -24,16 +23,25 @@ public class User {
     @Column(name = "uname")
     public String getUsername()
     {
-        return username;
+        return this.username;
+    }
+
+    public void setName(String name){
+        this.name=name;
+    }
+    @Basic
+    @Column(name = "name")
+    public String getName(){
+        return this.name;
     }
 
     public void setPassword(String password){
         this.password=password;
     }
     @Basic
-    @Column(name = "pwd")
+    @Column(name = "password")
     public String getPassword()
     {
-        return password;
+        return this.password;
     }
 }

@@ -1496,9 +1496,10 @@
       <exported-key name="fk_staff_store" table="staff" schema="" catalog="sakila" columns="store_id"/>
     </table>
     <table name="users" schema="" catalog="test" type="TABLE">
-      <column name="UNAME" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
-      <column name="PWD" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
-      <primary-key name="PRIMARY" columns="UNAME"/>
+      <column name="uname" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="name" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="uname"/>
     </table>
     <table name="city" schema="" catalog="world" type="TABLE">
       <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>

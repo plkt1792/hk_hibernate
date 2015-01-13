@@ -7,7 +7,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.*;
 /**
  * Created by Pulkit.singh on 1/12/2015.
  */
@@ -18,18 +17,15 @@ public class RegisterController {
     public ModelAndView login(HttpServletRequest request, HttpServletResponse response) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String name = request.getParameter("name");
 
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
+        Service service = new Service();
+        boolean status = service.registerService(username,password,name);
 
-        UserDao udao = new UserDao();
-        boolean status = udao.authenticateUser(user);
         if (status) {
-            return new ModelAndView("err", "message", "User Already registered");
+            return new ModelAndView("welcome", "username", username);
         } else {
-            udao.makeEntry(user);
-            return new ModelAndView("welcome", "username", user.getUsername());
+            return new ModelAndView("err", "message", "User Already registered");
         }
     }
 }

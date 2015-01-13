@@ -17,7 +17,6 @@ public class UserDao {
 
         Session session = new Configuration().configure().buildSessionFactory().openSession();
         Criteria cr = session.createCriteria(User.class);
-        System.out.print("hello");
         cr.add(Restrictions.eq("username",u.getUsername()));
         cr.add(Restrictions.eq("password",u.getPassword()));
         List list = cr.list();
