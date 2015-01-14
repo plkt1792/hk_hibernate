@@ -29,7 +29,7 @@
 </head>
 <body>
 <form method="post" action="register.html" onSubmit="return doSubmit()">
-    <table>
+    <table align="center">
         <tr>
             <td><b>Name</b></td>
             <td><input type="text" name="name" id="name"></td>

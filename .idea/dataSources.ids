@@ -1495,11 +1495,25 @@
       <exported-key name="fk_inventory_store" table="inventory" schema="" catalog="sakila" columns="store_id"/>
       <exported-key name="fk_staff_store" table="staff" schema="" catalog="sakila" columns="store_id"/>
     </table>
+    <table name="permissions" schema="" catalog="test" type="TABLE">
+      <column name="rolename" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="perms" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <primary-key name="PRIMARY" columns="rolename,perms"/>
+      <exported-key name="roles_ibfk_2" table="roles" schema="" catalog="test" columns="rolename"/>
+    </table>
+    <table name="roles" schema="" catalog="test" type="TABLE">
+      <column name="username" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="rolename" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <primary-key name="PRIMARY" columns="username,rolename"/>
+      <foreign-key name="roles_ibfk_1" columns="username" ref-table="users" ref-schema="" ref-catalog="test" ref-columns="uname" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="roles_ibfk_2" columns="rolename" ref-table="permissions" ref-schema="" ref-catalog="test" ref-columns="rolename" update-rule="3" delete-rule="3" deferrability="2"/>
+    </table>
     <table name="users" schema="" catalog="test" type="TABLE">
       <column name="uname" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
       <column name="name" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
       <column name="password" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
       <primary-key name="PRIMARY" columns="uname"/>
+      <exported-key name="roles_ibfk_1" table="roles" schema="" catalog="test" columns="username"/>
     </table>
     <table name="city" schema="" catalog="world" type="TABLE">
       <column name="ID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>

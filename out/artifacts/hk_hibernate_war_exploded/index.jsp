@@ -12,7 +12,9 @@
 </head>
 <body>
 <form action="login.html" method="post">
-    <table>
+    <br>
+    <br>
+    <table align="center">
         <tr>
             <td align="center"><b>Username</b></td>
             <td><input type="text" name="username"></td>

@@ -11,6 +11,40 @@
     <title>Welcome</title>
 </head>
 <body>
-    Hello, ${username}
+<h3>Hello, ${username}</h3>
+<br><br>
+    <table align="center">
+        <tr>
+            <td align="center">
+                <form method="post" action="edit.html">
+                    <input type="hidden" value='${username}' name="uname">
+                    <input type="submit" value="EDIT EMPLOYEE DETAILS">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <form method="post" action="delete.html">
+                    <input type="hidden" value='${username}' name="uname">
+                    <input type="submit" value="DELETE EMPLOYEE DETAILS">
+                </form>
+            </td>
+        </tr>
+        <tr>
+
+            <td align="center">
+                <form method="post" action="view.html">
+                    <input type="hidden" value='${username}' name="uname">
+                    <input type="submit" value="VIEW EMPLOYEE DETAILS">
+                </form>
+            </td>        </tr>
+        <tr>
+            <td align="center">
+                <form method="post" action="register.jsp">
+                    <input type="submit" value="CREATE EMPLOYEE ACCOUNT">
+                </form>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
