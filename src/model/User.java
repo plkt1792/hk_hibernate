@@ -13,6 +13,7 @@ public class User {
     private String username;
     private String name;
     private String password;
+    private String manager;
 
     public User(){}
 
@@ -33,6 +34,15 @@ public class User {
     @Column(name = "name")
     public String getName(){
         return this.name;
+    }
+
+    public void setManager(String manager){
+        this.manager=manager;
+    }
+    @Basic
+    @Column(name="mngr")
+    public String getManager(){
+        return this.manager;
     }
 
     public void setPassword(String password){

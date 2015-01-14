@@ -7,6 +7,7 @@ package control;
 import model.*;
 
 import java.util.List;
+import java.util.Stack;
 
 public class Service {
 
@@ -45,6 +46,11 @@ public class Service {
         return userDao.getRolesList();
     }
 
+    public List getMngrList(){
+        UserDao userDao = new UserDao();
+        return userDao.getUsersList();
+    }
+
     public boolean checkPermi(String username,String permi){
         User user = new User();
         user.setUsername(username);
@@ -67,11 +73,32 @@ public class Service {
         userDao.delRole(role);
     }
 
+    public void delMngr(String username,String mname){
+        User user = new User();
+        user.setManager(mname);
+        user.setUsername(username);
+        UserDao userDao = new UserDao();
+        userDao.delMg(user);
+    }
+
     public void addRole(String username,String rolename){
         Role role = new Role();
         role.setRolename(rolename);
         role.setUsername(username);
         UserDao userDao = new UserDao();
         userDao.addRole(role);
+    }
+
+    public void addMngr(String username,String mname){
+        User user = new User();
+        user.setManager(mname);
+        user.setUsername(username);
+        UserDao userDao = new UserDao();
+        userDao.addMg(user);
+    }
+
+    public Stack<String> getSubList(String manager){
+        UserDao userDao = new UserDao();
+        return userDao.getSList(manager);
     }
 }

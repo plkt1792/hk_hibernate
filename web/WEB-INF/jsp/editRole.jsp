@@ -1,6 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Iterator" %>
 <%@ page import="model.Role" %>
+<%@ page import="model.User" %>
 <%--
   Created by IntelliJ IDEA.
   User: Pulkit.singh

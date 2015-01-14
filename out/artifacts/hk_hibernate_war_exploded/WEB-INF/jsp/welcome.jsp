@@ -18,7 +18,15 @@
             <td align="center">
                 <form method="post" action="edit.html">
                     <input type="hidden" value='${username}' name="uname">
-                    <input type="submit" value="EDIT EMPLOYEE DETAILS">
+                    <input type="submit" value="EDIT EMPLOYEE ROLES">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <form method="post" action="editM.html">
+                    <input type="hidden" value='${username}' name="uname">
+                    <input type="submit" value="EDIT MANAGER DETAILS">
                 </form>
             </td>
         </tr>
@@ -31,13 +39,22 @@
             </td>
         </tr>
         <tr>
-
             <td align="center">
                 <form method="post" action="view.html">
                     <input type="hidden" value='${username}' name="uname">
                     <input type="submit" value="VIEW EMPLOYEE DETAILS">
                 </form>
-            </td>        </tr>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <form method="post" action="sub.html">
+                    <input type="text" name="manager">
+                    <input type="hidden" value='${username}' name="uname">
+                    <input type="submit" value="VIEW ALL SUBORDINATES">
+                </form>
+            </td>
+        </tr>
         <tr>
             <td align="center">
                 <form method="post" action="register.jsp">

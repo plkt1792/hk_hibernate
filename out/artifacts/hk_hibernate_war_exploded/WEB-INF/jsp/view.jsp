@@ -20,6 +20,7 @@
         <tr>
             <td align="center"><b>USERNAME</b></td>
             <td align="center"><b>EMPLOYEE NAME</b></td>
+            <td align="center"><b>MANAGER NAME</b></td>
         </tr>
     <%
         List eList = (List)request.getAttribute("list");
@@ -28,6 +29,7 @@
             out.print("<tr>");
             out.print("<td align='center'>" + user.getUsername()+"</td>");
             out.print("<td align='center'>" + user.getName()+"</td>");
+            out.print("<td align='center'>" + user.getManager()+"</td>");
             out.print("</tr>");
         }
     %>

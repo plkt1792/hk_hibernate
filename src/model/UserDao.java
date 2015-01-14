@@ -8,8 +8,7 @@ import org.hibernate.criterion.Restrictions;
 
 
 import javax.management.Query;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Pulkit.singh on 1/12/2015.
@@ -59,6 +58,16 @@ public class UserDao {
         session.close();
     }
 
+    public void addMg(User user){
+        Session session = new Configuration().configure().buildSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        String hql = "update User set manager ='"+user.getManager()+"' where username ='"+user.getUsername()+"'";
+        org.hibernate.Query query = session.createQuery(hql);
+        query.executeUpdate();
+        t.commit();
+        session.close();
+    }
+
     public List getUsersList(){
         Session session = new Configuration().configure().buildSessionFactory().openSession();
         Criteria cr = session.createCriteria(User.class);
@@ -74,7 +83,6 @@ public class UserDao {
 
     public void delUser(User user){
         Session session = new Configuration().configure().buildSessionFactory().openSession();
-        Criteria cr = session.createCriteria(User.class);
         Transaction t = session.beginTransaction();
         String hql = "Delete from User where username = '"+user.getUsername()+"'";
         org.hibernate.Query query = session.createQuery(hql);
@@ -85,9 +93,18 @@ public class UserDao {
 
     public void delRole(Role role){
         Session session = new Configuration().configure().buildSessionFactory().openSession();
-        Criteria cr = session.createCriteria(Role.class);
         Transaction t = session.beginTransaction();
         String hql = "Delete from Role where username = '"+role.getUsername()+"' and rolename = '"+role.getRolename()+"'";
+        org.hibernate.Query query = session.createQuery(hql);
+        query.executeUpdate();
+        t.commit();
+        session.close();
+    }
+
+    public void delMg(User user){
+        Session session = new Configuration().configure().buildSessionFactory().openSession();
+        Transaction t = session.beginTransaction();
+        String hql = "update User set manager ="+null+" where username ='"+user.getUsername()+"'";
         org.hibernate.Query query = session.createQuery(hql);
         query.executeUpdate();
         t.commit();
@@ -112,5 +129,41 @@ public class UserDao {
             }
         }
         return false;
+    }
+
+    public Stack<String> getSList(String manager){
+        Session session = new Configuration().configure().buildSessionFactory().openSession();
+        Criteria cr = session.createCriteria(User.class);
+        List temp = cr.list();
+        HashMap<String,String> e_m = new HashMap<String, String>();
+        for (Iterator it =temp.iterator(); it.hasNext();){
+            User user = (User) it.next();
+            String uname = user.getUsername();
+            String mname = user.getManager();
+            if(mname==null)
+                mname="X";
+            e_m.put(uname,mname);
+        }
+
+
+
+        Stack<String> result = new Stack<String>();
+        Queue<String> queue = new LinkedList<String>();
+        queue.add(manager);
+        while (!queue.isEmpty()){
+            String mngr = queue.remove();
+            Set set = e_m.entrySet();
+            Iterator it = set.iterator();
+            while (it.hasNext()) {
+                Map.Entry me = (Map.Entry) it.next();
+                String uname = (String) me.getKey();
+                String mname = (String) me.getValue();
+                if(mname.equals(mngr)){
+                    queue.add(uname);
+                    result.push(uname);
+                }
+            }
+        }
+        return result;
     }
 }
