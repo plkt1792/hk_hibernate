@@ -1,9 +1,11 @@
 package model;
 
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 
@@ -18,7 +20,9 @@ public class UserDao {
 
         Session session = new Configuration().configure().buildSessionFactory().openSession();
         Criteria cr = session.createCriteria(User.class);
-        cr.add(Restrictions.eq("username",u.getUsername()));
+        cr.setProjection(Projections.property("username"));
+        cr.setProjection(Projections.property("password"));
+        cr.add(Restrictions.eq("username", u.getUsername()));
         cr.add(Restrictions.eq("password",u.getPassword()));
         List list = cr.list();
         session.close();
@@ -32,6 +36,7 @@ public class UserDao {
 
         Session session = new Configuration().configure().buildSessionFactory().openSession();
         Criteria cr = session.createCriteria(User.class);
+        cr.setProjection(Projections.property("username"));
         cr.add(Restrictions.eq("username",u.getUsername()));
         List list = cr.list();
         session.close();
@@ -68,10 +73,12 @@ public class UserDao {
         session.close();
     }
 
-    public List getUsersList(){
+    public List<User> getUsersList(){
         Session session = new Configuration().configure().buildSessionFactory().openSession();
         Criteria cr = session.createCriteria(User.class);
-        return cr.list();
+        List<User> userList = new ArrayList<User>();
+        userList = cr.list();
+        return userList;
     }
 
     public List getRolesList(){
@@ -113,22 +120,13 @@ public class UserDao {
 
     public boolean checkPermi(User user,String permission){
         Session session = new Configuration().configure().buildSessionFactory().openSession();
-        Criteria cr = session.createCriteria(Role.class);
-        cr.add(Restrictions.eq("username",user.getUsername()));
-        List rolesList = cr.list();
-        for (Iterator it =rolesList.iterator(); it.hasNext();){
-            Role role = (Role) it.next();
-            Criteria crt = session.createCriteria(Permission.class);
-            crt.add(Restrictions.eq("rolename",role.getRolename()));
-            List permiList = crt.list();
-            for (Iterator it2 =permiList.iterator(); it2.hasNext();){
-                Permission perm = (Permission)it2.next();
-                String permi = perm.getPermission();
-                if(permi.equals(permission))
-                    return true;
-            }
+        String hql = "Select P.permission from Permission P,Role R where P.rolename = R.rolename and R.username='"+user.getUsername()+"' and P.permission='"+permission+"'";
+        org.hibernate.Query query = session.createQuery(hql);
+        List pList = query.list();
+        if(pList.isEmpty()){
+            return false;
         }
-        return false;
+        return true;
     }
 
     public Stack<String> getSList(String manager){

@@ -48,6 +48,13 @@
         </tr>
         <tr>
             <td align="center">
+                <form method="get" action="/rest/service/user">
+                    <input type="submit" value="VIEW EMPLOYEE DETAILS (in JSON form)">
+                </form>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
                 <form method="post" action="sub.html">
                     <input type="text" name="manager">
                     <input type="hidden" value='${username}' name="uname">

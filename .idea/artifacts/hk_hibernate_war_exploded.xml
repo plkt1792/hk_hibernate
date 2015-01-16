@@ -12,8 +12,7 @@
           <element id="library" level="project" name="Hibernate 4.2.2-4.2.2" />
           <element id="library" level="project" name="Spring-4.1.2.RELEASE" />
           <element id="library" level="project" name="com.mysql.jdbc" />
-          <element id="library" level="project" name="jackson-core-asl-1.8.10" />
-          <element id="library" level="project" name="jackson-mapper-asl-1.8.10" />
+          <element id="library" level="project" name="jackson-annotations-2.5.0" />
         </element>
       </element>
     </root>

@@ -15,8 +15,6 @@ public class User {
     private String password;
     private String manager;
 
-    public User(){}
-
     public void setUsername(String username){
         this.username=username;
     }
@@ -54,4 +52,10 @@ public class User {
     {
         return this.password;
     }
+
+    @Override
+    public String toString(){
+        return "User [username = "+username+", name = "+name+", password = "+password+", manager = "+manager+"]";
+    }
+
 }

@@ -5,6 +5,8 @@ package control;
  */
 
 import model.*;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
 import java.util.Stack;
@@ -15,8 +17,8 @@ public class Service {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
-
-        UserDao userDao = new UserDao();
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserDao userDao = (UserDao)applicationContext.getBean("udao");
         return  userDao.authenticate(user);
     }
 
@@ -26,7 +28,8 @@ public class Service {
         user.setUsername(username);
         user.setName(name);
 
-        UserDao userDao = new UserDao();
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserDao userDao = (UserDao)applicationContext.getBean("udao");
         boolean status = userDao.authenticateUser(user);
         if (!status){
             userDao.makeEntry(user);
@@ -36,32 +39,37 @@ public class Service {
             return false;
     }
 
-    public List getEmpList(){
-        UserDao userDao = new UserDao();
+    public List<User> getEmpList(){
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserDao userDao = (UserDao)applicationContext.getBean("udao");
         return userDao.getUsersList();
     }
 
     public List getRoleList(){
-        UserDao userDao = new UserDao();
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserDao userDao = (UserDao)applicationContext.getBean("udao");
         return userDao.getRolesList();
     }
 
     public List getMngrList(){
-        UserDao userDao = new UserDao();
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserDao userDao = (UserDao)applicationContext.getBean("udao");
         return userDao.getUsersList();
     }
 
     public boolean checkPermi(String username,String permi){
         User user = new User();
         user.setUsername(username);
-        UserDao userDao = new UserDao();
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserDao userDao = (UserDao)applicationContext.getBean("udao");
         return userDao.checkPermi(user, permi);
     }
 
     public void delEmp(String username){
         User user = new User();
         user.setUsername(username);
-        UserDao userDao = new UserDao();
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserDao userDao = (UserDao)applicationContext.getBean("udao");
         userDao.delUser(user);
     }
 
@@ -69,7 +77,8 @@ public class Service {
         Role role = new Role();
         role.setRolename(rolename);
         role.setUsername(username);
-        UserDao userDao = new UserDao();
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserDao userDao = (UserDao)applicationContext.getBean("udao");
         userDao.delRole(role);
     }
 
@@ -77,7 +86,8 @@ public class Service {
         User user = new User();
         user.setManager(mname);
         user.setUsername(username);
-        UserDao userDao = new UserDao();
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserDao userDao = (UserDao)applicationContext.getBean("udao");
         userDao.delMg(user);
     }
 
@@ -85,7 +95,8 @@ public class Service {
         Role role = new Role();
         role.setRolename(rolename);
         role.setUsername(username);
-        UserDao userDao = new UserDao();
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserDao userDao = (UserDao)applicationContext.getBean("udao");
         userDao.addRole(role);
     }
 
@@ -93,12 +104,14 @@ public class Service {
         User user = new User();
         user.setManager(mname);
         user.setUsername(username);
-        UserDao userDao = new UserDao();
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserDao userDao = (UserDao)applicationContext.getBean("udao");
         userDao.addMg(user);
     }
 
     public Stack<String> getSubList(String manager){
-        UserDao userDao = new UserDao();
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        UserDao userDao = (UserDao)applicationContext.getBean("udao");
         return userDao.getSList(manager);
     }
 }

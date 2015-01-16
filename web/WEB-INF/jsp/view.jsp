@@ -23,7 +23,7 @@
             <td align="center"><b>MANAGER NAME</b></td>
         </tr>
     <%
-        List eList = (List)request.getAttribute("list");
+        List<User> eList = (List<User>) request.getAttribute("list");
         for (Iterator it = eList.iterator(); it.hasNext();) {
             User user = (User)it.next();
             out.print("<tr>");
